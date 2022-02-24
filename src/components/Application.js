@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 
 import DayList from "./DayList";
-import InterviewerList from "./InterviewerList";
-import Appointment from "component/Appointment";
+// import InterviewerList from "./InterviewerList";
+// import Appointment from "component/Appointment";
 
 import "components/Application.scss";
 
