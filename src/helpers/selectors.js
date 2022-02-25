@@ -27,5 +27,24 @@ function getAppointmentsForDay(state, day) {
   return filteredAppointments;
 }
 
-export { getAppointmentsForDay };
+
+
+function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+  
+  const newObj ={};
+  for(const interviewer in state.interviewers) {
+    if (interviewer.toString() === interview.interviewer.toString()) {
+      newObj.student = interview.student;
+      newObj.interviewer = state.interviewers[interviewer]
+    };
+  };
+
+  return newObj;
+}
+
+
+export { getAppointmentsForDay, getInterview};
 
