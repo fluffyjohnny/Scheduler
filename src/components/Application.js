@@ -5,6 +5,7 @@ import { getAppointmentsForDay, getInterview } from "../helpers/selectors";
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
 
+
 import "components/Application.scss";
 
 
@@ -54,8 +55,6 @@ export default function Application(props) {
         setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
       });
   }, []);
-  
-  console.log("state: ", state); ///////////////
 
   return (
     <main className="layout">
