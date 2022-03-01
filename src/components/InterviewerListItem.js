@@ -5,7 +5,7 @@ import "components/InterviewerListItem.scss";
 
 export default function InterviewListItem(props) {
   let interviewerClass = classNames("interviewers__item", {
-    'interviewers__item--selected': props.selected,
+    "interviewers__item--selected": props.selected,
   });
 
   // const interviewerName = () => {
@@ -14,7 +14,6 @@ export default function InterviewListItem(props) {
   //   }
   //   return props.name;
   // }
-
 
   return (
     <li className={interviewerClass} onClick={props.setInterviewer}>
@@ -25,5 +24,5 @@ export default function InterviewListItem(props) {
       />
       {props.selected && props.name}
     </li>
-  )
+  );
 }

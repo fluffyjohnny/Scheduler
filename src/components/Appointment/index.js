@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
@@ -20,6 +20,7 @@ export default function Appointment(props) {
   const EDIT = `EDIT`;
   const ERROR_SAVE = `ERROR_SAVE`;
   const ERROR_DELETE = `ERROR_DELETE`;
+  const ERROR = `ERROR`;
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -68,6 +69,13 @@ export default function Appointment(props) {
         />
       )}
       {mode === CREATE && (
+        <Form
+          onCancel={() => back()}
+          onSave={save}
+          interviewers={props.interviewers}
+        />
+      )}
+      {mode === ERROR && (
         <Form
           onCancel={() => back()}
           onSave={save}
