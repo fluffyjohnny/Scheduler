@@ -6,14 +6,14 @@ import InterviewerList from "components/InterviewerList";
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const [error, setError] = useState(``);
+  const [error, setError] = useState(null);
 
   const handleChange = (event) => {
     setStudent(event.target.value);
   };
 
   const reset = () => {
-    setStudent("");
+    setStudent('');
     setInterviewer(null);
   };
 
@@ -24,7 +24,7 @@ export default function Form(props) {
   };
 
   const validate = () => {
-    if (student === "") {
+    if (student === '') {
       setError("Student name cannot be blank");
       return;
     }
@@ -32,7 +32,7 @@ export default function Form(props) {
       setError("Please select an interviewer");
       return;
     }
-    setError("");
+    setError(null);
     props.onSave(student, interviewer);
   };
 

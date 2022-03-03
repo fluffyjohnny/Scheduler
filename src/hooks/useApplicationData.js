@@ -91,10 +91,6 @@ export default function useApplicationData() {
       ...state.appointments[id],
       interview: { ...interview },
     };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
 
     return axios
       .put(`/api/appointments/${id}`, {
@@ -106,15 +102,6 @@ export default function useApplicationData() {
   }
 
   function cancelInterview(id) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null,
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-
     return axios.delete(`/api/appointments/${id}`).then(() => {
       dispatch({ type: SET_INTERVIEW, id, interview: null });
     });
