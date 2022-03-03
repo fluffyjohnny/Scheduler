@@ -8,8 +8,8 @@ The Interview Scheduler is a single page application that allows users to look t
 
 
 # Final Product
-!["Index"](/public/images/INDEX.png)
-!["Edit"]()
+!["Index"](https://raw.githubusercontent.com/fluffyjohnny/Scheduler/master/public/images/INDEX.png)
+!["Edit"](https://raw.githubusercontent.com/fluffyjohnny/Scheduler/master/public/images/EDIT-APP.png)
 
 
 # Dependencies
