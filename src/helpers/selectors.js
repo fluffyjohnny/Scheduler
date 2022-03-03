@@ -14,21 +14,18 @@
 // return arr;
 
 function getAppointmentsForDay(state, day) {
-
   let appointmentArr = [];
   let filteredAppointments = [];
   for (let objDay of state.days) {
     if (objDay.name === day) {
-      appointmentArr = objDay.appointments
+      appointmentArr = objDay.appointments;
     }
   }
   for (let appointmentID of appointmentArr) {
-    filteredAppointments.push(state.appointments[appointmentID])
+    filteredAppointments.push(state.appointments[appointmentID]);
   }
   return filteredAppointments;
-};
-
-
+}
 
 function getInterview(state, interview) {
   if (!interview) {
@@ -39,14 +36,12 @@ function getInterview(state, interview) {
   for (const interviewer in state.interviewers) {
     if (interviewer.toString() === interview.interviewer.toString()) {
       newObj.student = interview.student;
-      newObj.interviewer = state.interviewers[interviewer]
-    };
-  };
+      newObj.interviewer = state.interviewers[interviewer];
+    }
+  }
 
   return newObj;
-};
-
-
+}
 
 function getInterviewersForDay(state, day) {
   let interviewersArr = [];
@@ -54,20 +49,18 @@ function getInterviewersForDay(state, day) {
 
   for (let objDay of state.days) {
     if (objDay.name === day) {
-      interviewersArr = objDay.interviewers
+      interviewersArr = objDay.interviewers;
     }
   }
 
   for (let interviewerID of interviewersArr) {
-    const interviewersVar = state.interviewers[interviewerID]
+    const interviewersVar = state.interviewers[interviewerID];
     if (interviewersVar) {
-    filteredInteviewers.push(interviewersVar)
-    } 
+      filteredInteviewers.push(interviewersVar);
+    }
   }
 
   return filteredInteviewers;
 }
 
-
 export { getAppointmentsForDay, getInterview, getInterviewersForDay };
-
