@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
@@ -62,6 +62,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer.name}
+          id={props.id}
           onDelete={() => {
             transition(CONFIRM);
           }}

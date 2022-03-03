@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Show(props) {
+  console.log(props)
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
@@ -11,7 +12,7 @@ export default function Show(props) {
         </section>
       </section>
       <section className="appointment__card-right">
-        <section className="appointment__actions">
+        <section className="appointment__actions" id={props.id}>
           <img
             className="appointment__actions-button"
             src="images/edit.png"

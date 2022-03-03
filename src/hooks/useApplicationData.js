@@ -10,6 +10,30 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
+  const SET_DAY = "SET_DAY";
+  const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+  const SET_INTERVIEW = "SET_INTERVIEW";
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case SET_DAY:
+        return {
+          /* insert logic */
+        };
+      case SET_APPLICATION_DATA:
+        return {
+          /* insert logic */
+        };
+      case SET_INTERVIEW: {
+        return; /* insert logic */
+      }
+      default:
+        throw new Error(
+          `Tried to reduce with unsupported action type: ${action.type}`
+        );
+    }
+  }
+
   useEffect(() => {
     Promise.all([
       axios.get(`/api/days`),
@@ -27,23 +51,21 @@ export default function useApplicationData() {
 
   const setDay = (day) => setState({ ...state, day });
 
-  console.log("state: ", state); //
-  console.log(
-    "count: ",
-    getAppointmentsForDay(state, state.day).filter(
-      (appointment) => appointment.interview === null
-    ).length
-  );
+  const updateSpots = function (state, appointments) {
+    const dayObj = state.days.find((x) => x.name === state.day);
 
-  const findDay = (day) => {
-    const dayOfWeek = {
-      Monday: 0,
-      Tuesday: 1,
-      Wednesday: 2,
-      Thursday: 3,
-      Friday: 4,
-    };
-    return dayOfWeek[day];
+    let spots = 0;
+    for (const id of dayObj.appointments) {
+      const appointment = appointments[id];
+      if (!appointment.interview) {
+        spots++;
+      }
+    }
+
+    const newDay = { ...dayObj, spots };
+    const newDays = state.days.map((d) => (d.name === state.day ? newDay : d));
+
+    return newDays;
   };
 
   function bookInterview(id, interview) {
@@ -55,17 +77,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-
-    const dayOfWeek = findDay(state.day);
-
-    let day = {
-      ...state.days[dayOfWeek],
-      spots: state.days[dayOfWeek].spots - 1,
-    };
-    let days = state.days;
-    if (state.appointments[id].interview === null) {
-      days[dayOfWeek] = day;
-    }
+    const days = updateSpots(state, appointments);
 
     return axios
       .put(`/api/appointments/${id}`, {
@@ -85,14 +97,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-
-    const dayOfWeek = findDay(state.day);
-    let day = {
-      ...state.days[dayOfWeek],
-      spots: state.days[dayOfWeek].spots + 1,
-    };
-    let days = state.days;
-    days[dayOfWeek] = day;
+    const days = updateSpots(state, appointments);
 
     return axios.delete(`/api/appointments/${id}`).then(() => {
       setState({
